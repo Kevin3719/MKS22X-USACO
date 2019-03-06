@@ -16,16 +16,14 @@ public class USACO {
         }
       }
     }
-
-
-
-
     return input;
   }
   public static int bronze(String filename) {
     int output = 0;
-
-
+    Scanner s1 = new Scanner(filename);
+    int length = s1.next();
+    int width = s1.next();
+    int water = s1.next();
 
 
 
