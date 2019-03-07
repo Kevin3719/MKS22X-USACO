@@ -44,7 +44,32 @@ public class USACO {
   }
     return output * 72 * 72;
   }
+  public static int silver(String filename) throws FileNotFoundException {
+    int output = 0;
+    Scanner s1 = new Scanner(new File(filename));
+    int length =  s1.nextInt();
+    int width = s1.nextInt();
+    int moves = s1.nextInt();
+    int[][] pasture = new int[length][width];
+    for (int i = 0; i < length; i ++) {
+      for (int j = 0; j < width; j++) {
+        if(s1.next() == ".") {
+          pasture[i][j] = 0;
+        }
+        if(s1.next() == "*") {
+          pasture[i][j] = -1;
+        }
+      }
+    }
 
 
 
+
+
+
+
+
+    return 0;
+
+  }
 }
