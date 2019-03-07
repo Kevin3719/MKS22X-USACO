@@ -51,6 +51,7 @@ public class USACO {
     int width = s1.nextInt();
     int moves = s1.nextInt();
     int[][] pasture = new int[length][width];
+    int[][] temporary = new int[length][width];
     for (int i = 0; i < length; i ++) {
       for (int j = 0; j < width; j++) {
         if(s1.next() == ".") {
@@ -61,15 +62,35 @@ public class USACO {
         }
       }
     }
+    int startingrow = s1.nextInt();
+    int startingcol = s1.nextInt();
+    int endingrow = s1.nextInt();
+    int endingcol = s1.nextInt();
+    pasture[startingrow][endingcol] = 1;
+    for(int k = 0; k < moves; k++) {
+      temporary = new int[length][width];
+      for (int i = 0; i < length; i ++) {
+        for (int j = 0; j < width; j++) {
+          if (pasture[i][j] != -1) {
+          if (i - 1 >= 0 && j - 1 >= 0 && pasture[i - 1][j - 1] != -1){
+            temporary[i][j] += pasture[i - 1][j - 1];
+          }
+          if (i - 1 >= 0 && j + 1 < width && pasture[i - 1][j - 1] != -1){
+            temporary[i][j] += pasture[i -1][j + 1];
+          }
+          if (i + 1 < length && j - 1 >= 0 && pasture[i - 1][j - 1] != -1){
+            temporary[i][j] += pasture[i + 1][j - 1];
+          }
+          if (i + 1 < length && j + 1 < width && pasture[i - 1][j - 1] != -1){
+            temporary[i][j] += pasture[i + 1][j + 1];
+          }
+        }
+        }
+      }
+      pasture = temporary;
 
-
-
-
-
-
-
-
-    return 0;
+    }
+    return pasture[endingrow][endingcol];
 
   }
 }
