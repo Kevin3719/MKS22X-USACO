@@ -21,10 +21,16 @@ public class USACO {
   public static int bronze(String filename) {
     int output = 0;
     Scanner s1 = new Scanner(filename);
-    int length = s1.next();
-    int width = s1.next();
-    int water = s1.next();
-
+    int length = (int) s1.nextDouble();
+    int width = (int)s1.nextDouble();
+    int water = (int)s1.nextDouble();
+    int cows = (int)s1.nextDouble();
+    int[][] lake = new int[length][width];
+    for (int i = 0; i < length; i ++) {
+      for (int j = 0; j < width; j++) {
+        lake[i][j] = (int) s1.nextDouble();
+      }
+    }
 
 
     return output * 72 * 72;
