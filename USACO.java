@@ -52,12 +52,14 @@ public class USACO {
     int moves = s1.nextInt();
     int[][] pasture = new int[length][width];
     int[][] temporary = new int[length][width];
+    String temp = "";
     for (int i = 0; i < length; i ++) {
       for (int j = 0; j < width; j++) {
-        if(s1.next() == ".") {
+        temp = s1.next();
+        if(temp.charAt(j) == '.') {
           pasture[i][j] = 0;
         }
-        if(s1.next() == "*") {
+        if(temp.charAt(j) == '*') {
           pasture[i][j] = -1;
         }
       }
