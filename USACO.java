@@ -44,6 +44,31 @@ public class USACO {
   }
     return output * 72 * 72;
   }
+  public static int[][] update(int[][] input) {
+    int[][] output = new int[input.length][input[0].length];
+    for (int i = 0; i < input.length; i ++) {
+      for (int j = 0; j < input[0].length; j++) {
+        if (input[i][j] != -1) {
+        if (j - 1 >= 0 && input[i][j - 1] != -1){
+          output[i][j] += input[i][j - 1];
+        }
+        if (i - 1 >= 0 && input[i - 1][j] != -1){
+          output[i][j] += input[i - 1][j];
+        }
+        if (i + 1 < input.length && input[i + 1][j] != -1){
+          output[i][j] += input[i + 1][j];
+        }
+        if ( j + 1 < input[0].length && input[i][j + 1] != -1){
+          output[i][j] += input[i][j + 1];
+        }
+      }
+      else {
+        output[i][j] = -1;
+      }
+      }
+    }
+    return output;
+  }
   public static int silver(String filename) throws FileNotFoundException {
     int output = 0;
     Scanner s1 = new Scanner(new File(filename));
@@ -54,8 +79,8 @@ public class USACO {
     int[][] temporary = new int[length][width];
     String temp = "";
     for (int i = 0; i < length; i ++) {
+      temp = s1.next();
       for (int j = 0; j < width; j++) {
-        temp = s1.next();
         if(temp.charAt(j) == '.') {
           pasture[i][j] = 0;
         }
@@ -68,31 +93,11 @@ public class USACO {
     int startingcol = s1.nextInt();
     int endingrow = s1.nextInt();
     int endingcol = s1.nextInt();
-    pasture[startingrow][endingcol] = 1;
+    pasture[startingrow - 1][startingcol - 1] = 1;
     for(int k = 0; k < moves; k++) {
-      temporary = new int[length][width];
-      for (int i = 0; i < length; i ++) {
-        for (int j = 0; j < width; j++) {
-          if (pasture[i][j] != -1) {
-          if (i - 1 >= 0 && j - 1 >= 0 && pasture[i - 1][j - 1] != -1){
-            temporary[i][j] += pasture[i - 1][j - 1];
-          }
-          if (i - 1 >= 0 && j + 1 < width && pasture[i - 1][j - 1] != -1){
-            temporary[i][j] += pasture[i -1][j + 1];
-          }
-          if (i + 1 < length && j - 1 >= 0 && pasture[i - 1][j - 1] != -1){
-            temporary[i][j] += pasture[i + 1][j - 1];
-          }
-          if (i + 1 < length && j + 1 < width && pasture[i - 1][j - 1] != -1){
-            temporary[i][j] += pasture[i + 1][j + 1];
-          }
-        }
-        }
-      }
-      pasture = temporary;
-
+      pasture = update(pasture);
     }
-    return pasture[endingrow][endingcol];
+    return pasture[endingrow - 1][endingcol - 1];
 
   }
 }
